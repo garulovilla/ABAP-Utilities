@@ -1,7 +1,7 @@
 *&---------------------------------------------------------------------*
-*& Report Z_DYNAMIC_SELECTION_SCREEN
+*& Report Z_SIMPLE_REUSE_ALV_GRID.
 *&---------------------------------------------------------------------*
-* Program             : Z_DYNAMIC_SELECTION_SCREEN
+* Program             : Z_SIMPLE_REUSE_ALV_GRID
 * Description         :
 * Developer           :
 * Date                : DD.MM.AAAA
@@ -16,18 +16,26 @@
 * Request ID          :
 * Description         :
 *&---------------------------------------------------------------------*
-REPORT z_dynamic_selection_screen .
+
+REPORT z_simple_reuse_alv_grid.
 
 *&---------------------------------------------------------------------*
 *& Includes
 *&---------------------------------------------------------------------*
-INCLUDE z_dynamic_selection_screen_top.
-INCLUDE z_dynamic_selection_screen_s01.
-INCLUDE z_dynamic_selection_screen_f01.
-
+INCLUDE z_simple_reuse_alv_grid_top.
+INCLUDE z_simple_reuse_alv_grid_s01.
+INCLUDE z_simple_reuse_alv_grid_f01.
+INCLUDE z_simple_reuse_alv_grid_f02.
 
 *&---------------------------------------------------------------------*
-*& AT SELECTION-SCREEN
+*& START-OF-SELECTION
 *&---------------------------------------------------------------------*
-AT SELECTION-SCREEN OUTPUT.
-  PERFORM f_01_modify_selection_screen.
+START-OF-SELECTION.
+
+  vg_error = c_false.
+  vg_repid = sy-repid.
+
+  PERFORM f_01_search_data.
+  CHECK vg_error = c_false.
+
+  PERFORM f_01_create_alv.
