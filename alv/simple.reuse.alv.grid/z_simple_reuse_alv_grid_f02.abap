@@ -121,7 +121,7 @@ FORM f_02_add_fieldcat USING piv_fieldname piv_text piv_props CHANGING pov_col_p
   sl_fieldcat-seltext_m = piv_text.
   sl_fieldcat-col_pos   = pov_col_pos.
 
-  IF pov_col_pos <> ''.
+  IF piv_props <> ''.
 
     SPLIT piv_props AT ',' INTO TABLE tl_string.
 
